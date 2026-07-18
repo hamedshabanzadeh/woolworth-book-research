@@ -15,7 +15,7 @@
 
 GitHub Pages:
 
-`https://USERNAME.github.io/REPOSITORY/`
+`https://github.com/hamedshabanzadeh/woolworth-book-research`
 
 ## فایل‌های پروژه
 
