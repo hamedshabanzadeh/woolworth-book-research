@@ -14,7 +14,7 @@
 ## مشاهده آنلاین
 
 
-*(https://hamedshabanzadeh.github.io/woolworth-book-research/)*
+*https://hamedshabanzadeh.github.io/woolworth-book-research*
 
 ## فایل‌های پروژه
 
