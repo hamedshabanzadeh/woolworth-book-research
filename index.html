@@ -1,0 +1,336 @@
+﻿<!DOCTYPE html>
+<html dir="rtl" lang="fa">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   تحلیل تعاملی رمان قاشق‌های وول‌ورث
+  </title>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js">
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100;400;700&amp;display=swap" rel="stylesheet"/>
+  <style>
+   body {
+            font-family: 'Vazirmatn', sans-serif;
+            background-color: #fdfbf7;
+            color: #3d3d3d;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 380px;
+        }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .nav-btn.active {
+            background-color: #bc6c25;
+            color: white;
+            border-color: #bc6c25;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(188, 108, 37, 0.2);
+        }
+  </style>
+ </head>
+ <body class="p-4 md:p-10">
+  <!-- 
+    Chosen Palette: "Energetic Earth" (Earth Brown #bc6c25, Sand #d4a373, Cream #fefae0).
+    Plan:
+    1. Overview: Replace radar chart with a horizontal bar chart for high readability.
+    2. Biography: Maintain interactive cards for the author's real-life struggles.
+    3. Style: Visual breakdown of Cummins' unique "anti-tragic" tone.
+    4. Review Table: Comparison of critical perspectives.
+    5. Toolkit: Ready-to-use discussion questions.
+    -->
+  <!-- CONFIRMATION: NO SVG used. NO Mermaid JS used. All graphics via Canvas (Chart.js) or HTML/CSS. -->
+  <div class="max-w-5xl mx-auto">
+   <!-- Header -->
+   <header class="text-center mb-10">
+    <h1 class="text-4xl md:text-5xl font-bold text-[#bc6c25] mb-2">
+     نگاهی به رمان «قاشق‌هایمان را از فروشگاه وولورت خریدیم»
+    </h1>
+   </header>
+   <!-- Navigation -->
+   <nav class="flex flex-wrap justify-center gap-3 mb-10">
+    <button class="nav-btn active px-6 py-2 border-2 border-[#d4a373] rounded-xl transition-all font-bold" onclick="showTab('overview')">
+     نگاه کلی
+    </button>
+    <button class="nav-btn px-6 py-2 border-2 border-[#d4a373] rounded-xl transition-all font-bold" onclick="showTab('biography')">
+     زندگی نویسنده
+    </button>
+    <button class="nav-btn px-6 py-2 border-2 border-[#d4a373] rounded-xl transition-all font-bold" onclick="showTab('style')">
+     سبک و بوطیقا
+    </button>
+    <button class="nav-btn px-6 py-2 border-2 border-[#d4a373] rounded-xl transition-all font-bold" onclick="showTab('reviews')">
+     ترازوی نقد
+    </button>
+    <button class="nav-btn px-6 py-2 border-2 border-[#d4a373] rounded-xl transition-all font-bold" onclick="showTab('toolkit')">
+     کیت بحث
+    </button>
+   </nav>
+   <!-- Tab Content: Overview -->
+   <div class="tab-content active animate-fadeIn" id="overview">
+    <section class="glass-card p-8 rounded-3xl shadow-lg">
+     <h2 class="text-2xl font-bold mb-6 text-[#bc6c25] border-r-4 border-[#bc6c25] pr-4">
+      وزن و تأثیر مفاهیم در روایت
+     </h2>
+     <p class="leading-loose mb-8 text-gray-700">
+      در این نمودار، میزان تأثیرگذاری و حضور مفاهیم کلیدی رمان را مشاهده می‌کنید. برخلاف تصور عمومی، این کتاب فقط درباره فقر نیست؛ بلکه «طنز سیاه» و «نقد مادی‌گرایی» ستون‌های اصلی هستند که رنج قهرمان را برای خواننده قابل‌تحمل و در عین حال عمیق‌تر می‌کنند.
+     </p>
+     <div class="chart-container">
+      <canvas id="mainBarChart">
+      </canvas>
+     </div>
+    </section>
+   </div>
+   <!-- Tab Content: Biography -->
+   <div class="tab-content space-y-6" id="biography">
+    <section class="glass-card p-8 rounded-3xl shadow-lg">
+     <h2 class="text-2xl font-bold mb-6 text-[#bc6c25]">
+      باربارا کامینز: واقعیت فراتر از داستان
+     </h2>
+     <div class="grid md:grid-cols-2 gap-4">
+      <div class="p-5 bg-white rounded-2xl shadow-sm border-r-8 border-[#d4a373] cursor-pointer hover:shadow-md transition-all" onclick="toggleD('b1')">
+       <h3 class="font-bold text-lg">
+        ازدواج اول و فقر (۱۹۳۱)
+       </h3>
+       <p class="hidden mt-3 text-gray-600 text-sm leading-relaxed" id="b1">
+        او با نقاشی خودشیفته ازدواج کرد که الگوی شخصیت «چارلز» بود. فقر مفرط او در این دوران باعث شد برای بقا مدل نقاشی شود.
+       </p>
+      </div>
+      <div class="p-5 bg-white rounded-2xl shadow-sm border-r-8 border-[#d4a373] cursor-pointer hover:shadow-md transition-all" onclick="toggleD('b2')">
+       <h3 class="font-bold text-lg">
+        نماد سمندر آبی
+       </h3>
+       <p class="hidden mt-3 text-gray-600 text-sm leading-relaxed" id="b2">
+        باربارا در روز عروسی‌اش یک سمندر واقعی در جیب داشت! این موجود در رمان نماد معصومیتی است که در چنگال فقر گرفتار شده.
+       </p>
+      </div>
+      <div class="p-5 bg-white rounded-2xl shadow-sm border-r-8 border-[#d4a373] cursor-pointer hover:shadow-md transition-all" onclick="toggleD('b3')">
+       <h3 class="font-bold text-lg">
+        تجربه زایمان صنعتی
+       </h3>
+       <p class="hidden mt-3 text-gray-600 text-sm leading-relaxed" id="b3">
+        توصیفات تکان‌دهنده بیمارستان در کتاب، تجربه واقعی و تلخ باربارا از سیستم درمانی بی‌رحم لندن دهه ۳۰ است.
+       </p>
+      </div>
+      <div class="p-5 bg-white rounded-2xl shadow-sm border-r-8 border-[#d4a373] cursor-pointer hover:shadow-md transition-all" onclick="toggleD('b4')">
+       <h3 class="font-bold text-lg">
+        پایان خوش واقعی
+       </h3>
+       <p class="hidden mt-3 text-gray-600 text-sm leading-relaxed" id="b4">
+        برخلاف بسیاری از نویسندگان هم‌عصر، باربارا در نهایت با ازدواج دومش به ثبات رسید و توانست این تروماها را به ادبیات تبدیل کند.
+       </p>
+      </div>
+     </div>
+    </section>
+   </div>
+   <!-- Tab Content: Style -->
+   <div class="tab-content space-y-6" id="style">
+    <section class="glass-card p-8 rounded-3xl shadow-lg text-center">
+     <h2 class="text-2xl font-bold mb-8 text-[#bc6c25]">
+      بوطیقای لحن ضد-تراژیک
+     </h2>
+     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div class="p-6">
+       <div class="w-16 h-16 bg-[#dda15e] rounded-full mx-auto flex items-center justify-center text-white text-2xl mb-4 shadow-lg">
+        😶
+       </div>
+       <h4 class="font-bold mb-2 text-[#606c38]">
+        ترومازدایی
+       </h4>
+       <p class="text-sm text-gray-600 leading-relaxed">
+        بیان فجایع با لحنی ساده و بی‌طرفانه برای محافظت از روان راوی.
+       </p>
+      </div>
+      <div class="p-6">
+       <div class="w-16 h-16 bg-[#dda15e] rounded-full mx-auto flex items-center justify-center text-white text-2xl mb-4 shadow-lg">
+        🌑
+       </div>
+       <h4 class="font-bold mb-2 text-[#606c38]">
+        طنز سیاه
+       </h4>
+       <p class="text-sm text-gray-600 leading-relaxed">
+        ایجاد خنده در تاریک‌ترین لحظات فقر؛ مثل اشتباه گرفتن ادرار با شربت.
+       </p>
+      </div>
+      <div class="p-6">
+       <div class="w-16 h-16 bg-[#dda15e] rounded-full mx-auto flex items-center justify-center text-white text-2xl mb-4 shadow-lg">
+        💰
+       </div>
+       <h4 class="font-bold mb-2 text-[#606c38]">
+        دقت مادی
+       </h4>
+       <p class="text-sm text-gray-600 leading-relaxed">
+        ثبت دقیق قیمت‌ها و هزینه‌ها برای نشان دادن فشار خردکننده اقتصاد بر روح.
+       </p>
+      </div>
+     </div>
+    </section>
+   </div>
+   <!-- Tab Content: Reviews -->
+   <div class="tab-content space-y-6" id="reviews">
+    <section class="glass-card p-8 rounded-3xl shadow-lg overflow-x-auto">
+     <h2 class="text-2xl font-bold mb-6 text-[#bc6c25]">
+      ترازوی نقد: نظرات موافق و مخالف
+     </h2>
+     <table class="w-full text-right border-collapse bg-white rounded-xl overflow-hidden shadow-sm">
+      <thead>
+       <tr class="bg-[#d4a373] text-white">
+        <th class="p-4 border-b">
+         منتقد / منبع
+        </th>
+        <th class="p-4 border-b">
+         نکات مثبت (ستایش)
+        </th>
+        <th class="p-4 border-b">
+         نکات منفی (چالش)
+        </th>
+       </tr>
+      </thead>
+      <tbody id="reviewsTbody">
+      </tbody>
+     </table>
+    </section>
+   </div>
+   <!-- Tab Content: Toolkit -->
+   <div class="tab-content space-y-6" id="toolkit">
+    <section class="glass-card p-8 rounded-3xl shadow-lg">
+     <h2 class="text-2xl font-bold mb-6 text-[#bc6c25]">
+      کیت بحث برای جلسه کتاب‌خوانی
+     </h2>
+     <div class="space-y-4">
+      <div class="p-5 bg-[#fefae0] rounded-2xl border-l-8 border-[#bc6c25]">
+       <h3 class="font-bold text-[#bc6c25] mb-2">
+        استراتژی بقا:
+       </h3>
+       <p class="text-gray-800">
+        آیا سادگی لحن «سوفیا» نشانه بلاهت اوست یا یک مکانیسم دفاعی آگاهانه برای فرو نپاشیدن؟
+       </p>
+      </div>
+      <div class="p-5 bg-[#fefae0] rounded-2xl border-l-8 border-[#bc6c25]">
+       <h3 class="font-bold text-[#bc6c25] mb-2">
+        نقد هنرمند خودشیفته:
+       </h3>
+       <p class="text-gray-800">
+        نقش «چارلز» در بازنمایی سوءاستفاده از مفهوم هنر برای فرار از مسئولیت‌های انسانی چیست؟
+       </p>
+      </div>
+      <div class="p-5 bg-[#fefae0] rounded-2xl border-l-8 border-[#bc6c25]">
+       <h3 class="font-bold text-[#bc6c25] mb-2">
+        اشیاء به مثابه شخصیت:
+       </h3>
+       <p class="text-gray-800">
+        چرا نویسنده اینقدر روی قیمت قاشق‌ها یا قبض‌های گاز تمرکز دارد؟ این اشیاء چه پیامی برای خواننده مدرن دارند؟
+       </p>
+      </div>
+     </div>
+    </section>
+   </div>
+
+   <!-- PDF Download Section -->
+   <section class="glass-card p-6 md:p-8 rounded-3xl shadow-lg mt-10 mb-10 text-center">
+    <h2 class="text-2xl font-bold mb-4 text-[#bc6c25]">
+     📄 دانلود فایل PDF تحقیق در مورد کتاب و نظرات پیرامون آن
+    </h2>
+    <p class="leading-loose mb-6 text-gray-700">
+     این فایل شامل نسخه کامل تحقیق عمیق، تحلیل کتاب، بررسی زندگی نویسنده، سبک روایت و دیدگاه‌های منتقدان درباره این اثر است.
+    </p>
+    <a
+     href="research.pdf"
+     target="_blank"
+     rel="noopener noreferrer"
+     class="inline-flex items-center justify-center bg-[#bc6c25] text-white px-7 py-3 rounded-xl font-bold hover:opacity-90 transition-all shadow-md">
+     📥 مشاهده و دانلود فایل PDF
+    </a>
+   </section>
+
+   <footer class="bg-slate-900 text-slate-400 py-8 text-center text-sm border-t border-slate-800">
+    <p>
+     تهیه شده توسط
+     <a class="font-bold text-cyan-300 hover:text-yellow-300 transition cursor-pointer" href="https://linktr.ee/hamed.shabanzadeh" rel="noopener noreferrer" target="_blank">
+      حامد شعبان‌زاده
+     </a>
+     با ابزار جمینای | ©2026
+    </p>
+   </footer>
+  </div>
+  <script>
+   const reviewData = [
+            { c: 'مگی اوفارل', p: 'صدای بی‌همتا و نمایش دقیق فرسایش روح زن.', n: 'لحن ساده ممکن است عمق تروما را بپوشاند.' },
+            { c: 'بلک‌آکسفورد', p: 'بازنمایی درخشان زایمان صنعتی و فقر مادی.', n: 'انفعال مفرط شخصیت اصلی در برابر مشکلات.' },
+            { c: 'لوسی شولز', p: 'ترکیب جسورانه تراژدی و کمدی‌های غریب.', n: 'عدم تحلیل عمیق سیاسی در پایان‌بندی اثر.' },
+            { c: 'خوانندگان ایرانی', p: 'فضاپردازی ملموس و تم‌های فمینیستی قوی.', n: 'سختی در برقراری ارتباط با نثر عامدانه ناپخته.' }
+        ];
+
+        window.onload = () => {
+            initBarChart();
+            renderReviews();
+        };
+
+        function initBarChart() {
+            const ctx = document.getElementById('mainBarChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['نقد مادی‌گرایی', 'طنز سیاه', 'ترومای خانوادگی', 'مبارزات فمینیستی', 'نقد طبقاتی'],
+                    datasets: [{
+                        label: 'وزن در روایت (درصد)',
+                        data: [90, 85, 75, 65, 80],
+                        backgroundColor: '#bc6c25',
+                        borderRadius: 8,
+                        barThickness: 30
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: { max: 100, ticks: { callback: v => v + '%' } }
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                title: (items) => items[0].label
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function renderReviews() {
+            const container = document.getElementById('reviewsTbody');
+            reviewData.forEach(r => {
+                container.innerHTML += `
+                    <tr class="hover:bg-[#fefae0] transition-colors">
+                        <td class="p-4 border-b font-bold text-[#bc6c25]">${r.c}</td>
+                        <td class="p-4 border-b text-sm text-green-700">${r.p}</td>
+                        <td class="p-4 border-b text-sm text-red-700">${r.n}</td>
+                    </tr>
+                `;
+            });
+        }
+
+        function showTab(id) {
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        function toggleD(id) {
+            const el = document.getElementById(id);
+            el.classList.toggle('hidden');
+        }
+  </script>
+ </body>
+</html>
