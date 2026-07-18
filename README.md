@@ -13,9 +13,8 @@
 
 ## مشاهده آنلاین
 
-GitHub Pages:
 
-`https://github.com/hamedshabanzadeh/woolworth-book-research`
+*(https://hamedshabanzadeh.github.io/woolworth-book-research/)*
 
 ## فایل‌های پروژه
 
